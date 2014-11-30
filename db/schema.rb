@@ -14,38 +14,38 @@
 ActiveRecord::Schema.define(version: 20141105170310) do
 
   create_table "events", force: true do |t|
-    t.string   "title"
-    t.integer  "event_thumb"
-    t.string   "venue"
-    t.integer  "total_tickets"
-    t.integer  "available_tickets"
-    t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.string   "title",             limit: 255
+    t.integer  "event_thumb",       limit: 4
+    t.string   "venue",             limit: 255
+    t.integer  "total_tickets",     limit: 4
+    t.integer  "available_tickets", limit: 4
+    t.integer  "user_id",           limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.datetime "when_at"
   end
 
-  add_index "events", ["user_id", "created_at"], name: "index_events_on_user_id_and_created_at"
-  add_index "events", ["user_id"], name: "index_events_on_user_id"
+  add_index "events", ["user_id", "created_at"], name: "index_events_on_user_id_and_created_at", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "orders", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.integer  "tickets_purchased"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.integer  "user_id",           limit: 4
+    t.integer  "event_id",          limit: 4
+    t.integer  "tickets_purchased", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "orders", ["event_id"], name: "index_orders_on_event_id"
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["event_id"], name: "index_orders_on_event_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "password_digest"
+    t.string   "name",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "password_digest", limit: 255
   end
 
-  add_index "users", ["name"], name: "index_users_on_name", unique: true
+  add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
 
 end

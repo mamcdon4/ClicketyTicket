@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # $current_user
     
     
-    def show
+  def show
     $current_user = @user
     if ! $current_user.nil? && $current_user.id != params[:id]
       @user = User.find($current_user.id) #$current_user.id
@@ -27,8 +27,9 @@ class UsersController < ApplicationController
     @events = @events.where('available_tickets > 0').all
     
     @order = Order.new
-    
-    @orders = Order.where( 'orders.user_id == (?)', @user.id ).joins(:event).order('events.when_at').all
+    #The following line is broken and returens an error since mysql does not use the same syntax sqlite uses
+    #The line might also be facked now, probably need to pull a new copy
+    @orders = Order.where( 'orders.user_id = (?)', @user.id ).joins(:event).order('events.when_at').all
     
     
     #ScheduledCourse.joins(:course).order('courses.name')

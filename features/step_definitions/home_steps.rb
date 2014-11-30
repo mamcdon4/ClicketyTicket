@@ -42,16 +42,13 @@ end
 Then(/^the user dashboard is loaded$/) do
     visit "/users/1" 
     expect(page).to have_content("Event Details")
+    expect(page).to have_content("Upcoming Events:")
 end
 
 When(/^I press "(.*?)"$/) do |button|
     click_button(button)
 end
 
-Then(/^I press book it$/) do 
-    #expect(page).to have_content("Book it!")
-    find("event2").click
-end
 
 Given(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
     fill_in(field, :with => value)

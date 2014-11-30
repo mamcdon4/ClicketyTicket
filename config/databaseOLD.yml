@@ -11,15 +11,7 @@ default: &default
 
 development:
   <<: *default
-  adapter: mysql
-  host: clicketyticket.duckdns.org
-  port: 3307
-  encoding: utf8
-  reconnect: false
-  database: clicketyticketdbDEV
-  pool: 5
-  username: c9app
-  password: 123698741
+  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,15 +23,11 @@ test: &test
 
 
 production:
-  adapter: mysql
-  host: clicketyticket.duckdns.org
-  port: 3307
-  encoding: utf8
-  reconnect: false
-  database: clicketyticketdb
+  <<: *default
+  adapter: postgresql
+  database: ticket_database
   pool: 5
-  username: c9app
-  password: 123698741
+  timeout: 5000
 
 
 

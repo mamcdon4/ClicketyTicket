@@ -21,6 +21,8 @@ gem 'sdoc',                    '0.4.0', group: :doc
 gem 'simplecov', :require => false, :group => :test
 gem 'rspec-rails'
 gem 'chromedriver-helper'
+gem 'yaml_db'
+gem 'mysql'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
