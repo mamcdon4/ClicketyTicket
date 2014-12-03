@@ -1,11 +1,20 @@
 class EventsController < ApplicationController
   
   def index
-    #@events = Event.all
-    #@events = Event.where('when_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day).all
-    @events = Event.where('when_at >= (?)', DateTime.now.beginning_of_day ).all
-    #@events = @events.where('title == (?)', "Sporting Event 2" ).all
-    @events = @events.where('available_tickets > 0').all
+    #these two work for non caching system
+    #@events = Event.where('when_at >= (?)', DateTime.now.beginning_of_day ).all
+    #@events = @events.where('available_tickets > 0').all
+    #end working non chache system
+    
+    
+    #SQL Caching start------------------------------------
+    @events = Rails.cache.fetch("your_cache_key", :expires_in => 5.minutes) do
+      Event.where('when_at >= (?)', DateTime.now.beginning_of_day ).all
+      @events = @events.where('available_tickets > 0').all
+    end
+    
+    #SQL Caching END--------------------------------
+    
   end
   
   def selected

@@ -6,10 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-15.times do |n|
-  name = "example-#{n+1}@asu.edu"
-  password = "password"
+#this should be 100000 but it got interrupted so i tried to resume, also change n value back to n+1
+100000.times do |n|
+  name = "asdf#{n+1}@asdf.com"
+  password = "asdfasdf"
   User.create!(name:  name,
               password:              password,
               password_confirmation: password,)
@@ -22,8 +22,8 @@ users = User.order(:created_at).take(1)
   event_thumb = n
   venue = "Location "+ (n+1).to_s
   when_at = n.days.from_now
-  total_tickets = (n+1)*5
-  available_tickets = n*2
+  total_tickets = (n+1)*500
+  available_tickets = n*200
   users.each { |user| user.events.create!(title: title, event_thumb: event_thumb,
     venue: venue, when_at: when_at, total_tickets: total_tickets, 
     available_tickets: available_tickets) }

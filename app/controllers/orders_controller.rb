@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
     @order.user_id = $current_user.id
     @order.event_id = $current_event.id
     
+    
     respond_to do |format|
       if @order.tickets_purchased <= $current_event.available_tickets &&  @order.tickets_purchased >= 1
         $current_event.available_tickets -= @order.tickets_purchased
@@ -82,6 +83,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :event_id, :tickets_purchased)
+      params.require(:order).permit(:user_id, :event_id, :tickets_purchased) 
     end
 end

@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def current_event
     #puts params[:event_id]
     #puts params[:id]
-    $current_event = Event.find_by(id: params[:event_id]) 
+    $current_event = Event.find_by(id: params[:event_id])
     head :ok, content_type: "text/html"
   end
   
